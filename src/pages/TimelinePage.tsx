@@ -19,6 +19,7 @@ export default function TimelinePage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="Government Action Timeline" description="Chronological log of every significant action by Nepal's new RSP government since March 27, 2026." />
       <h1 className="section-title mb-2">Government Action Timeline</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Chronological log of every significant action since March 27, 2026.
