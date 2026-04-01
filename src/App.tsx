@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { TopNav, BottomNav } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import HomePage from "./pages/HomePage";
 import PlanPage from "./pages/PlanPage";
 import TimelinePage from "./pages/TimelinePage";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
+        <Footer />
         <BottomNav />
       </BrowserRouter>
     </TooltipProvider>
