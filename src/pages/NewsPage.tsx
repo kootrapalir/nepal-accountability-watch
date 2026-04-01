@@ -30,6 +30,7 @@ export default function NewsPage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="News & Sentiment Analysis" description="Aggregated news coverage of Nepal's government from national and international media, categorized by sentiment." />
       <h1 className="section-title mb-2">News & Sentiment</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Aggregated coverage from national and international media, categorized by sentiment.

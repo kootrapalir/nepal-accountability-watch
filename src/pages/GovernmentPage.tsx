@@ -7,6 +7,7 @@ const icons = [Building2, Users, Scale, Layers, Shield];
 export default function GovernmentPage() {
   return (
     <div className="page-container">
+      <SEOHead title="Government Structure — Nepal 101" description="How Nepal's government works under the 2015 Constitution. Executive, legislature, judiciary, federal structure, and oversight bodies." />
       <h1 className="section-title mb-2">Government Structure — Nepal 101</h1>
       <p className="text-sm text-muted-foreground mb-8">
         How Nepal's government is structured under the 2015 Constitution. Non-partisan, factual, educational.
