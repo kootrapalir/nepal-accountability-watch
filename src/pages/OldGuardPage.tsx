@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { oldGuardList, corruptionCases } from "@/data/oldGuard";
 import { StatusBadge } from "@/components/StatusBadge";
+import { SEOHead } from "@/components/SEOHead";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function OldGuardPage() {

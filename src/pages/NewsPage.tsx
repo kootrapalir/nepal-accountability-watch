@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { newsArticles, getNewsSentimentStats, type Sentiment } from "@/data/news";
+import { SEOHead } from "@/components/SEOHead";
 
 const sentimentColors: Record<Sentiment, string> = {
   positive: 'bg-success/10 text-success border-success/20',

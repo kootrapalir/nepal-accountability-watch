@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { timelineEvents, timelineCategories } from "@/data/timeline";
 import { StatusBadge } from "@/components/StatusBadge";
+import { SEOHead } from "@/components/SEOHead";
 
 const sigColors: Record<string, string> = {
   Historic: 'border-l-primary',

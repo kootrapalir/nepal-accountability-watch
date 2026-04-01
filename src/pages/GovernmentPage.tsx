@@ -1,5 +1,6 @@
 import { governmentStructure, electionResults } from "@/data/government";
 import { Building2, Users, Scale, Layers, Shield } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 
 const icons = [Building2, Users, Scale, Layers, Shield];
 

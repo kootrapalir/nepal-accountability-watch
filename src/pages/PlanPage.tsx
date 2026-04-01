@@ -2,6 +2,7 @@ import { useState } from "react";
 import { planItems, planCategories, getPlanStats, type PlanStatus } from "@/data/planItems";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function PlanPage() {
   const [filter, setFilter] = useState<PlanStatus | 'all'>('all');

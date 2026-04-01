@@ -2,7 +2,8 @@ import { useState } from "react";
 import { arrestedPersons, getArrestStats, type ArrestStatus } from "@/data/arrests";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
-import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function RBBPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
