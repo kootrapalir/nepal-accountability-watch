@@ -3,7 +3,8 @@ import { arrestedPersons, getArrestStats, type ArrestStatus } from "@/data/arres
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
 import { SEOHead } from "@/components/SEOHead";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { SectionHeader, PrayerFlagDivider, MandalaWatermark } from "@/components/NepaliPatterns";
+import { ChevronDown, ChevronUp, Shield, AlertTriangle, Users } from "lucide-react";
 
 export default function RBBPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -20,23 +21,25 @@ export default function RBBPage() {
   });
 
   return (
-    <div className="page-container">
+    <div className="page-container nepal-pattern-bg">
       <SEOHead title="RAW Behind Bars — Arrest Tracker" description="Track every arrest, investigation, and case update for Nepal's old regime figures. KP Oli, Deuba, Prachanda, and more." />
-      <div className="mb-6">
-        <h1 className="section-title">
-          <span className="text-primary">RAW</span> Behind Bars
-        </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Tracking every arrest, investigation, and case update for figures from the old regime. Unfiltered. Real.
-        </p>
+      
+      {/* Header with dramatic styling */}
+      <div className="relative mb-8">
+        <MandalaWatermark className="absolute -right-10 -top-10 w-40 h-40 opacity-[0.03] pointer-events-none" />
+        <SectionHeader sub="Tracking every arrest, investigation, and case update. Unfiltered. Real.">
+          ⚖️ <span className="text-primary">RAW</span> Behind Bars
+        </SectionHeader>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <StatCard label="Total Tracked" value={stats.total} />
-        <StatCard label="Arrested" value={stats.arrested} variant="destructive" />
-        <StatCard label="Investigating" value={stats.investigating} variant="warning" />
+        <StatCard label="Total Tracked" value={stats.total} icon={<Users className="w-4 h-4" />} />
+        <StatCard label="Arrested" value={stats.arrested} variant="destructive" icon={<Shield className="w-4 h-4" />} />
+        <StatCard label="Investigating" value={stats.investigating} variant="warning" icon={<AlertTriangle className="w-4 h-4" />} />
       </div>
+
+      <PrayerFlagDivider className="mb-6 rounded-full overflow-hidden" />
 
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-6">
@@ -44,17 +47,15 @@ export default function RBBPage() {
           <button
             key={s}
             onClick={() => setStatusFilter(s)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-              statusFilter === s ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-            }`}
+            className={`filter-pill ${statusFilter === s ? 'filter-pill-active' : 'filter-pill-inactive'}`}
           >
-            {s === 'all' ? 'All' : s.charAt(0).toUpperCase() + s.slice(1)}
+            {s === 'all' ? '👥 All' : s === 'arrested' ? '🔒 Arrested' : '🔍 Investigating'}
           </button>
         ))}
         <select
           value={partyFilter}
           onChange={(e) => setPartyFilter(e.target.value)}
-          className="px-3 py-1.5 rounded-full text-xs font-medium bg-muted text-muted-foreground border-0 outline-none"
+          className="filter-pill filter-pill-inactive cursor-pointer"
         >
           <option value="all">All Parties</option>
           {parties.map((p) => (
@@ -68,17 +69,17 @@ export default function RBBPage() {
         {filtered.map((person) => {
           const expanded = expandedId === person.id;
           return (
-            <div key={person.id} className="stat-card">
+            <div key={person.id} className={`stat-card transition-all ${expanded ? 'ring-1 ring-primary/20' : ''}`}>
               <button
                 onClick={() => setExpandedId(expanded ? null : person.id)}
                 className="w-full text-left"
               >
                 <div className="flex items-start gap-3">
-                  {/* Avatar */}
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-display font-bold text-sm shrink-0 ${
+                  {/* Avatar with gradient border */}
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-display font-bold text-sm shrink-0 ${
                     person.status === 'arrested'
-                      ? 'bg-destructive/10 text-destructive'
-                      : 'bg-warning/10 text-warning'
+                      ? 'bg-destructive/10 text-destructive border border-destructive/20'
+                      : 'bg-warning/10 text-warning border border-warning/20'
                   }`}>
                     {person.initials}
                   </div>
@@ -89,62 +90,49 @@ export default function RBBPage() {
                       <StatusBadge status={person.status} />
                     </div>
                     <p className="text-xs text-muted-foreground">{person.role}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{person.party}</p>
+                    <p className="text-[10px] text-muted-foreground/70 mt-0.5 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />
+                      {person.party}
+                    </p>
                   </div>
 
-                  <div className="shrink-0 mt-1">
+                  <div className="shrink-0 mt-1 p-1 rounded-lg hover:bg-muted transition-colors">
                     {expanded ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
                   </div>
                 </div>
               </button>
 
               {expanded && (
-                <div className="mt-4 pt-4 border-t space-y-3">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Charges</p>
-                    <ul className="space-y-1">
-                      {person.charges.map((c, i) => (
-                        <li key={i} className="text-xs flex items-start gap-1.5">
-                          <span className="w-1 h-1 rounded-full bg-destructive mt-1.5 shrink-0" />
-                          {c}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {person.arrestDate && (
-                    <div>
-                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Arrest Date</p>
-                      <p className="text-xs font-mono">{person.arrestDate}</p>
+                <div className="mt-4 pt-4 border-t space-y-4">
+                  {[
+                    { label: "Charges", items: person.charges, dot: "bg-destructive" },
+                    ...(person.arrestDate ? [{ label: "Arrest Date", value: person.arrestDate }] : []),
+                    { label: "Arresting Authority", value: person.arrestingAuthority },
+                    { label: "Legal Basis", value: person.legalBasis },
+                    { label: "Details", value: person.detail, muted: true },
+                    { label: "Case Updates", items: person.caseUpdates, dot: "nepal-gradient" },
+                  ].map((section, i) => (
+                    <div key={i}>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-1.5 flex items-center gap-1.5">
+                        <span className="w-3 h-0.5 nepal-gradient rounded-full" />
+                        {section.label}
+                      </p>
+                      {'items' in section && section.items ? (
+                        <ul className="space-y-1.5 ml-4">
+                          {section.items.map((c: string, j: number) => (
+                            <li key={j} className="text-xs flex items-start gap-2">
+                              <span className={`w-1.5 h-1.5 rounded-full ${section.dot} mt-1.5 shrink-0`} />
+                              {c}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : 'value' in section ? (
+                        <p className={`text-xs ${section.muted ? 'text-muted-foreground' : ''} ml-4 ${section.label === 'Arrest Date' ? 'font-mono' : ''}`}>
+                          {section.value}
+                        </p>
+                      ) : null}
                     </div>
-                  )}
-
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Arresting Authority</p>
-                    <p className="text-xs">{person.arrestingAuthority}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Legal Basis</p>
-                    <p className="text-xs">{person.legalBasis}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Details</p>
-                    <p className="text-xs text-muted-foreground">{person.detail}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium mb-1">Case Updates</p>
-                    <ul className="space-y-1">
-                      {person.caseUpdates.map((u, i) => (
-                        <li key={i} className="text-xs text-muted-foreground flex items-start gap-1.5">
-                          <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
-                          {u}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  ))}
                 </div>
               )}
             </div>
