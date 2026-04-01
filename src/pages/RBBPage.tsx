@@ -19,6 +19,7 @@ export default function RBBPage() {
     return true;
   });
 
+  return (
     <div className="page-container">
       <SEOHead title="RAW Behind Bars — Arrest Tracker" description="Track every arrest, investigation, and case update for Nepal's old regime figures. KP Oli, Deuba, Prachanda, and more." />
       <div className="mb-6">
