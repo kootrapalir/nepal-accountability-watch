@@ -17,6 +17,7 @@ export default function PlanPage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="100-Day Plan Tracker" description="Track the RSP government's 100-point work plan progress — deadlines, completion status, and category breakdowns." />
       <h1 className="section-title mb-2">100-Day Plan Tracker</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Tracking the RSP government's formal 100-point work plan, approved March 27, 2026.
