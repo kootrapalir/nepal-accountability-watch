@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { timelineEvents, timelineCategories } from "@/data/timeline";
 import { StatusBadge } from "@/components/StatusBadge";
+import { SEOHead } from "@/components/SEOHead";
 
 const sigColors: Record<string, string> = {
   Historic: 'border-l-primary',
@@ -18,6 +19,7 @@ export default function TimelinePage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="Government Action Timeline" description="Chronological log of every significant action by Nepal's new RSP government since March 27, 2026." />
       <h1 className="section-title mb-2">Government Action Timeline</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Chronological log of every significant action since March 27, 2026.

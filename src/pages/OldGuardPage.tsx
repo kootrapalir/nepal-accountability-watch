@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { oldGuardList, corruptionCases } from "@/data/oldGuard";
 import { StatusBadge } from "@/components/StatusBadge";
+import { SEOHead } from "@/components/SEOHead";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function OldGuardPage() {
@@ -15,6 +16,7 @@ export default function OldGuardPage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="Old Guard Watchlist" description="Track Nepal's old political establishment — where they are, allegations, investigations, and corruption cases under review." />
       <h1 className="section-title mb-2">Old Guard Watchlist</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Tracking all major figures from Nepal's political establishment (pre-2026) — where they are, what they're accused of, and what's happening.

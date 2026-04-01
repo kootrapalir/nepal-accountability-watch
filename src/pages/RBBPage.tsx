@@ -2,7 +2,8 @@ import { useState } from "react";
 import { arrestedPersons, getArrestStats, type ArrestStatus } from "@/data/arrests";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
-import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function RBBPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -20,6 +21,7 @@ export default function RBBPage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="RAW Behind Bars — Arrest Tracker" description="Track every arrest, investigation, and case update for Nepal's old regime figures. KP Oli, Deuba, Prachanda, and more." />
       <div className="mb-6">
         <h1 className="section-title">
           <span className="text-primary">RAW</span> Behind Bars

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { newsArticles, getNewsSentimentStats, type Sentiment } from "@/data/news";
+import { SEOHead } from "@/components/SEOHead";
 
 const sentimentColors: Record<Sentiment, string> = {
   positive: 'bg-success/10 text-success border-success/20',
@@ -29,6 +30,7 @@ export default function NewsPage() {
 
   return (
     <div className="page-container">
+      <SEOHead title="News & Sentiment Analysis" description="Aggregated news coverage of Nepal's government from national and international media, categorized by sentiment." />
       <h1 className="section-title mb-2">News & Sentiment</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Aggregated coverage from national and international media, categorized by sentiment.
